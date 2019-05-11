@@ -28,10 +28,8 @@ function networkLife(network,source,dest,lambda)
 end
 
 lambda1, lambda2 = 0.5, 1.0
-
 roads = [[1,2],[1,3],[2,4],[2,5],[2,3],[3,4],[3,5],[4,5],[4,6],[5,6]]
 source, dest = 1, 6
-
 network = createNetwork(roads)
 N = 10^6
 
@@ -43,7 +41,7 @@ plt[:hist](failTimes1, 200, color="b", histtype = "step",
 plt[:hist](failTimes2, 200, color="r", histtype = "step", 
 	density=true, label="lambda = $(lambda2)")
 xlim(0,5)
-xlabel("Time until failure (days)")
+xlabel("t")
 legend(loc="upper right")
 
 println("Edge Failure Rate = $(lambda1): Mean failure time = ", 

@@ -5,7 +5,7 @@ k = 3
 
 xclara = dataset("cluster", "xclara")
 n,_ = size(xclara)
-dataPoints = [convert(Array{Float64},xclara[i,:])[1,:] for i in 1:n]
+dataPoints = [convert(Array{Float64,1},xclara[i,:]) for i in 1:n]
 shuffle!(dataPoints)
 
 xMin,xMax = minimum(first.(dataPoints)),maximum(first.(dataPoints))

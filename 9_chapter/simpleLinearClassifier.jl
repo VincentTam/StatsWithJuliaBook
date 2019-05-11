@@ -15,9 +15,9 @@ nTest = length(testImgs)
 testData = vcat([hcat(float.(testImgs[i])...) for i in 1:nTest]...);
 
 A = [ones(nTrain) trainData];
+Adag = pinv(A);
 tfPM(x) = x ? +1 : -1
 yDat(k) = tfPM.(onehotbatch(trainLabels,0:9)'[:,k+1])
-Adag = pinv(A);
 bets = [Adag*yDat(k) for k in 0:9];
 
 classify(input) = findmax([([1 ; input])'*bets[k] for k in 1:10])[2]-1

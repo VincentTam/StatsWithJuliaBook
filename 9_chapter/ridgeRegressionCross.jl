@@ -4,13 +4,14 @@ Random.seed!(0)
 df = dataset("MASS", "cpus")
 n = size(df)[1]
 df = df[shuffle(1:n),:]
+
 K = 10
 nG = Int(floor(n/K))
 n = K*nG
+println("Loosing $(size(df)[1] - n) observations.")
+
 lamMin, lamMax = 0.0, 1.0
 lamVals = collect(lamMin:(lamMax-lamMin)/(K-1):lamMax)
-
-println("Loosing $(size(df)[1] - n) observations.")
 
 testSet(k) = collect(1+nG*(k-1):nG*k)
 trainSet(k) = setdiff(1:n,testSet(k))

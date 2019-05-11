@@ -2,6 +2,7 @@ using Clustering, RDatasets, PyPlot
 
 df = dataset("cluster", "xclara")
 data = copy(convert(Array{Float64}, df)')
+
 seeds = initseeds(:rand, data, 3)
 xclara_kmeans = kmeans(data, 3)
 

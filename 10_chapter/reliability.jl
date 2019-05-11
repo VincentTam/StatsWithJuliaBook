@@ -11,16 +11,16 @@ end
 
 function pathExists(adjMatrix, source, destination)
     L = size(adjMatrix)[1]
-    adjMatrix += Matrix{Float64}(I, L, L)
+    adjMatrix += I 
     sign.(adjMatrix^L)[source,destination]
 end
 
 edges = [[1,2],[1,3],[2,4],[1,4],[3,4]]
-L = maximum(vcat(edges...))
 source, dest = 1, 4
-adjMat = adjMatrix(edges)
 
-N = 10^3
+N = 10^5
+L = maximum(vcat(edges...))
+adjMat = adjMatrix(edges)
 randNet(p) = adjMat.*(rand(L,L) .<= 1-p) 
 relEst(p) = sum( [pathExists(randNet(p), source, dest) for _ in 1:N] )/N
 

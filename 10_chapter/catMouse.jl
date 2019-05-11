@@ -1,4 +1,4 @@
-using Statistics, StatsBase, PyPlot, Random, LinearAlgebra
+tusing Statistics, StatsBase, PyPlot, Random, LinearAlgebra
 Random.seed!(1)
 
 function cmHitTime()
@@ -33,7 +33,7 @@ P = [   0   1   0   0   0;
         0   1/2 0   0   1/2;
         0   0   0   0   1]
 
-theor = (inv(I - P[1:4,1:4])*ones(4))[1]
+theor = [1 0 0 0] * (inv(I - P[1:4,1:4])*ones(4))
 est1 = mean([cmHitTime() for _ in 1:N])
 est2 = mean([length(mcTraj(P,1,10^6,5))-1 for _ in 1:N])
 

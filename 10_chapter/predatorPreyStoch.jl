@@ -21,10 +21,9 @@ for t in 2:tEndStoch
     trajStoch[t] = next(trajStoch[t-1]...) + [rand(Normal(0,sig)),0.0]
 end
 
-plot(first.(trajStoch),last.(trajStoch),"g--");
-plot(first.(trajStoch),last.(trajStoch),"g.");
-plot(first.(traj),last.(traj),"k--");
-plot(first.(traj),last.(traj),"r.")
-plot(equibPoint[1],equibPoint[2],"b.",ms="10")
-xlabel("X"); ylabel("Y")
-xlim(0,1);ylim(0,0.3);
+plot(traj[1][1], traj[1][2], "k.", ms=15, label="Initial state")
+plot(first.(traj),last.(traj),"b.--", label="Deterministic trajectory")
+plot(first.(trajStoch),last.(trajStoch),"g.--", label="Stochastic trajectory")
+plot(equibPoint[1],equibPoint[2],"r+",mew="4",ms="10",label="Equlibrium point")
+xlabel("X1"); ylabel("X2"); legend(loc="upper right")
+xlim(0,1); ylim(0,0.3)

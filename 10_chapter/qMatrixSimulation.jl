@@ -3,8 +3,8 @@ Random.seed!(1)
 
 function crudeSimulation(deltaT,T,Q,initProb)
     n = size(Q)[1]
-    Pdelta = Matrix{Float64}(I, n, n) + Q*deltaT
-    state = sample(1:n,weights(initProb))
+    Pdelta = I + Q*deltaT
+    state  = sample(1:n,weights(initProb))
     t = 0.0
     while t < T
         t += deltaT
@@ -15,9 +15,9 @@ end
 
 function doobGillespie(T,Q,initProb)
     n = size(Q)[1]
-    Pjump = (Q-diagm(0 => diag(Q)))./-diag(Q)
+    Pjump  = (Q-diagm(0 => diag(Q)))./-diag(Q)
     lamVec = -diag(Q)
-    state = sample(1:n,weights(initProb))
+    state  = sample(1:n,weights(initProb))
     sojournTime = rand(Exponential(1/lamVec[state]))
     t = 0.0
     while t + sojournTime < T
@@ -36,8 +36,8 @@ Q = [-3 1 2
 
 p0 = [0.4 0.5 0.1]
 
-crudeSimEst = counts([crudeSimulation(10^-3.,T,Q,p0) for _ in 1:N])/N
-doobGillespieEst = counts([doobGillespie(T,Q,p0) for _ in 1:N])/N
+crudeSimEst = counts([crudeSimulation(10^-3., T, Q, p0) for _ in 1:N])/N
+doobGillespieEst = counts([doobGillespie(T, Q, p0) for _ in 1:N])/N
 explicitEst = p0*exp(Q*T)
 
 println("CrudeSim: \t\t", crudeSimEst)

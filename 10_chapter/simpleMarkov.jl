@@ -1,9 +1,9 @@
-using LinearAlgebra, Statistics, Random, StatsBase, PyPlot
+using LinearAlgebra, Statistics, StatsBase, PyPlot
 
-n, N = 5, 10^5
-P = diagm(-1 => fill(1/3,n-1)) + 
-    diagm(0 => fill(1/3,n)) + 
-    diagm(1 => fill(1/3,n-1))
+n, N = 5, 10^6
+P = diagm(-1 => fill(1/3,n-1),
+           0 => fill(1/3,n),
+           1 => fill(1/3,n-1))
 P[1,n], P[n,1] = 1/3, 1/3
 
 A = UpperTriangular(ones(n,n))
@@ -37,9 +37,10 @@ est1, est2 = mean(data1), mean(data2)
 
 c1, c2 = counts(data1)/N,counts(data2)/N
 
-plot(4:33,c1[1:30],"b.")
-plot(4:33,c2[1:30],"r.")
-
+plot(4:33,c1[1:30],"b.", label="Transition probability matrix")
+plot(4:33,c2[1:30],"r+", label="Stochastic recursive formula")
+xlabel("Time"); ylabel("Probability")
+legend(loc="upper right")
 println("Estimated mean value of tau using f1: ",est1)
 println("Estimated mean value of tau using f2: ",est2)
 println("\nThe matrix P:")

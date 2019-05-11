@@ -16,6 +16,9 @@ trueM = theorM.(lamGrid)
 estM0 = estM.(lamGrid)
 estMCRN = estM.(lamGrid,seed) 
 
-plot(lamGrid,trueM,"g")
-plot(lamGrid,estM0,"r")
-plot(lamGrid,estMCRN,"b");
+plot(lamGrid,trueM,"k", label="Expected curve")
+plot(lamGrid,estM0,"b", label="No CRN estiamte")
+plot(lamGrid,estMCRN,"r", label="CRN estimate")
+xlim(0,1); ylim(0,0.4)
+xlabel("lambda")
+legend(loc="upper right")

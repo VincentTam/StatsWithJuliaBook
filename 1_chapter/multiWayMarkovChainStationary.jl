@@ -1,4 +1,4 @@
-using LinearAlgebra, StasBase
+using LinearAlgebra, StatsBase
 
 # Transition probability matrix
 P = [0.2 0.3 0.5;
@@ -9,7 +9,7 @@ P = [0.2 0.3 0.5;
 @time piProb1 = (P^10000000000)[1,:]
 
 # Second way (analytical solution)
-A = vcat((P' - Matrix{Float64}(I, 3, 3))[1:2,:],ones(3)')
+A = vcat((P' - I)[1:2,:],ones(3)')
 b = [0 0 1]'
 piProb2 = A\b
 
