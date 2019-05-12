@@ -16,7 +16,7 @@ piProb2 = A\b
 # Third way (analytical solution)
 eigVecs = eigvecs(copy(P'))
 highestVec = eigVecs[:,findmax(abs.(eigvals(P)))[2]]
-piProb3 = Array{Float64}(highestVec)/norm(highestVec,1);
+piProb3 = Array{Float64}(highestVec)/norm(highestVec,1)
 
 # Fourth way (slow and inaccurate: 8s for N = 10^7, err: 1e-4)
 numInState = zeros(3)
